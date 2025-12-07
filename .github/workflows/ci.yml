@@ -1,0 +1,136 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'hooks/**'
+      - 'agents/**'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  test:
+    name: Test Hooks
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r hooks/requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest hooks/tests/ -v --timeout=30
+
+      - name: Run tests with coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        run: |
+          pip install pytest-cov
+          pytest hooks/tests/ --cov=hooks --cov-report=xml --cov-report=term
+
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          flags: hooks
+        continue-on-error: true
+
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff mypy
+
+      - name: Lint with ruff
+        run: |
+          ruff check hooks/*.py --ignore E501
+
+      - name: Type check with mypy
+        run: |
+          mypy hooks/*.py --ignore-missing-imports --no-error-summary
+        continue-on-error: true
+
+  validate:
+    name: Validate Configurations
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate JSON files
+        run: |
+          python -m json.tool settings.json > /dev/null
+          echo "settings.json: valid"
+          python -m json.tool mcp.json > /dev/null
+          echo "mcp.json: valid"
+
+      - name: Validate agent YAML frontmatter
+        run: |
+          pip install pyyaml
+          python .github/scripts/validate-agents.py
+
+      - name: Check hook scripts are executable
+        run: |
+          for f in hooks/*.py; do
+            python -m py_compile "$f"
+            echo "$f: compiles"
+          done
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install bandit
+        run: pip install bandit
+
+      - name: Run security scan
+        run: |
+          bandit -r hooks/ -f txt -o bandit-report.txt || true
+          cat bandit-report.txt
+
+      - name: Upload security report
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-report
+          path: bandit-report.txt
+        if: always()

@@ -23,6 +23,18 @@ plugins/marketplaces/
 # Session archives are personal context
 memory-bank/main/sessions/*.json
 
+# Hook logs and state
+hooks/logs/
+hooks/session-tokens.json
+
+# Test artifacts
+.pytest_cache/
+.coverage
+coverage.xml
+*.pyc
+__pycache__/
+.mypy_cache/
+
 # OS files
 .DS_Store
 Thumbs.db
