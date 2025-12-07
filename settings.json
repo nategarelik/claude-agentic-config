@@ -1,0 +1,49 @@
+{
+  "permissions": {
+    "allow": [],
+    "deny": []
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/Nate2/.claude/hooks/skill-auto-activator.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Task|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/Nate2/.claude/hooks/riper-phase-validator.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/Nate2/.claude/hooks/session-archiver.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "superpowers-developing-for-claude-code@superpowers-marketplace": true,
+    "superpowers-lab@superpowers-marketplace": true,
+    "double-shot-latte@superpowers-marketplace": true
+  },
+  "alwaysThinkingEnabled": true
+}

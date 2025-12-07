@@ -1,0 +1,26 @@
+{
+  "superpowers-marketplace": {
+    "source": {
+      "source": "github",
+      "repo": "obra/superpowers-marketplace"
+    },
+    "installLocation": "C:\\Users\\Nate2\\.claude\\plugins\\marketplaces\\superpowers-marketplace",
+    "lastUpdated": "2025-12-05T00:10:59.289Z"
+  },
+  "claude-code-plugins": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-code"
+    },
+    "installLocation": "C:\\Users\\Nate2\\.claude\\plugins\\marketplaces\\claude-code-plugins",
+    "lastUpdated": "2025-12-04T11:26:10.427Z"
+  },
+  "claude-code-workflows": {
+    "source": {
+      "source": "github",
+      "repo": "wshobson/agents"
+    },
+    "installLocation": "C:\\Users\\Nate2\\.claude\\plugins\\marketplaces\\claude-code-workflows",
+    "lastUpdated": "2025-12-01T17:55:31.797Z"
+  }
+}

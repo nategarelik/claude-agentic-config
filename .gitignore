@@ -1,0 +1,28 @@
+# Sensitive and session-specific files
+.credentials.json
+history.jsonl
+history.jsonl.lock/
+
+# Temporary and state directories
+session-env/
+shell-snapshots/
+statsig/
+todos/
+debug/
+downloads/
+file-history/
+ide/
+projects/
+references/
+plans/
+
+# Plugin cache and cloned marketplaces (external repos)
+plugins/cache/
+plugins/marketplaces/
+
+# Session archives are personal context
+memory-bank/main/sessions/*.json
+
+# OS files
+.DS_Store
+Thumbs.db

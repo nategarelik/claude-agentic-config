@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "plugins": {
+    "superpowers@superpowers-marketplace": {
+      "version": "3.6.2",
+      "installedAt": "2025-12-05T00:11:14.953Z",
+      "lastUpdated": "2025-12-05T00:11:14.953Z",
+      "installPath": "C:\\Users\\Nate2\\.claude\\plugins\\cache\\superpowers",
+      "gitCommitSha": "154d664373569a83289684d7b01742a82cca4eaf",
+      "isLocal": false
+    },
+    "superpowers-developing-for-claude-code@superpowers-marketplace": {
+      "version": "0.3.1",
+      "installedAt": "2025-12-05T00:11:29.489Z",
+      "lastUpdated": "2025-12-05T00:11:29.489Z",
+      "installPath": "C:\\Users\\Nate2\\.claude\\plugins\\cache\\superpowers-developing-for-claude-code",
+      "gitCommitSha": "74afe935da49efe782907e837a27ce618498099a",
+      "isLocal": false
+    },
+    "superpowers-lab@superpowers-marketplace": {
+      "version": "0.1.0",
+      "installedAt": "2025-12-05T00:11:47.155Z",
+      "lastUpdated": "2025-12-05T00:11:47.155Z",
+      "installPath": "C:\\Users\\Nate2\\.claude\\plugins\\cache\\superpowers-lab",
+      "gitCommitSha": "e2bea3b300f8370ec1fe650fde608c815458dd0b",
+      "isLocal": false
+    },
+    "double-shot-latte@superpowers-marketplace": {
+      "version": "1.1.5",
+      "installedAt": "2025-12-05T00:12:01.824Z",
+      "lastUpdated": "2025-12-05T00:12:01.824Z",
+      "installPath": "C:\\Users\\Nate2\\.claude\\plugins\\cache\\double-shot-latte",
+      "gitCommitSha": "a8516cc5f6b62b25044b69a5ddcfac39d4a4177e",
+      "isLocal": false
+    }
+  }
+}
